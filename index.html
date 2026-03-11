@@ -63,20 +63,31 @@
 
         .safe-top { padding-top: env(safe-area-inset-top); }
         .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+        /* Chromebook / Tablet 螢幕優化 */
+        @media (min-width: 768px) {
+            .view-content {
+                padding-top: 2rem;
+            }
+            #flashcard {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
     <!-- 頂部狀態列 -->
     <header class="safe-top bg-white border-b-4 border-yellow-300 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <h1 class="text-xl font-black text-pink-500 tracking-tighter italic">Unit 2: <span class="text-cyan-500">Don't Worry. Be Happy!</span></h1>
+        <h1 class="text-xl md:text-2xl font-black text-pink-500 tracking-tighter italic">Unit 2: <span class="text-cyan-500">Don't Worry. Be Happy!</span></h1>
         <div id="compatibility-warning" class="hidden text-[10px] font-bold px-2 py-1 rounded-full bg-red-100 text-red-500 text-shadow-none">
-            請用 Chrome/Safari 開啟
+            請確保使用 Chrome/Safari 瀏覽器
         </div>
     </header>
 
-    <!-- 主要內容區 -->
-    <main id="app-container" class="max-w-md mx-auto p-4 mb-24">
+    <!-- 主要內容區：調整為 max-w-4xl 以適應 Chromebook -->
+    <main id="app-container" class="max-w-4xl mx-auto p-4 mb-24">
         <div id="view-flashcards" class="view-content"></div>
         <div id="view-challenges" class="view-content hidden"></div>
         <div id="view-logs" class="view-content hidden"></div>
@@ -85,23 +96,23 @@
 
     <!-- 底部導覽列 -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-4 border-pink-200 px-4 pt-2 pb-safe flex justify-around items-center z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-        <button onclick="switchView('flashcards')" class="nav-item flex flex-col items-center p-2 text-pink-500">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-            <span class="text-[10px] font-black mt-1 uppercase">單字卡</span>
+        <button onclick="switchView('flashcards')" class="nav-item flex flex-col items-center p-2 text-pink-500 group">
+            <svg class="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+            <span class="text-[10px] md:text-xs font-black mt-1 uppercase">單字卡</span>
         </button>
-        <button onclick="switchView('challenges')" class="nav-item flex flex-col items-center p-2 text-gray-400">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
-            <span class="text-[10px] font-black mt-1 uppercase">關卡挑戰</span>
+        <button onclick="switchView('challenges')" class="nav-item flex flex-col items-center p-2 text-gray-400 group">
+            <svg class="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+            <span class="text-[10px] md:text-xs font-black mt-1 uppercase">關卡挑戰</span>
         </button>
-        <button onclick="switchView('logs')" class="nav-item flex flex-col items-center p-2 text-gray-400">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
-            <span class="text-[10px] font-black mt-1 uppercase">學習日誌</span>
+        <button onclick="switchView('logs')" class="nav-item flex flex-col items-center p-2 text-gray-400 group">
+            <svg class="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+            <span class="text-[10px] md:text-xs font-black mt-1 uppercase">學習日誌</span>
         </button>
     </nav>
 
     <!-- 提示框 -->
     <div id="toast" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] hidden transition-all duration-300">
-        <div class="bg-white border-4 border-cyan-400 rounded-2xl px-6 py-3 shadow-2xl font-bold text-center">
+        <div class="bg-white border-4 border-cyan-400 rounded-2xl px-6 py-3 shadow-2xl font-bold text-center min-w-[200px]">
             <p id="toast-msg" class="text-cyan-600"></p>
         </div>
     </div>
@@ -137,8 +148,8 @@
             {id:10, word:'roughly', pos:'adv.', ch:'大約，約略地'},
             {id:11, word:'rough', pos:'adj.', ch:'約略的'},
             {id:12, word:'passive', pos:'adj.', ch:'消極的，被動的'},
-            {id:13, word:'encounter', pos:'vt.', ch:'遭遇，遇到'}, // 第一階段 (0-12)
-            {id:14, word:'frustration', pos:'n.', ch:'挫折，沮喪'}, // 第二階段 (13-26)
+            {id:13, word:'encounter', pos:'vt.', ch:'遭遇，遇到'}, 
+            {id:14, word:'frustration', pos:'n.', ch:'挫折，沮喪'}, 
             {id:15, word:'frustrate', pos:'vt.', ch:'使挫折，使沮喪'},
             {id:16, word:'devote', pos:'vt.', ch:'奉獻……'},
             {id:17, word:'devoted', pos:'adj.', ch:'熱愛……的，奉獻於……'},
@@ -162,7 +173,7 @@
         };
 
         // --- 狀態管理 ---
-        let currentFlashcardStage = 1; // 1: 第一階段, 2: 第二階段
+        let currentFlashcardStage = 1;
         let currentCardIndex = 0;
         let isRecording = false;
         let mediaRecorder;
@@ -170,6 +181,7 @@
         let recognition;
         let audioCtx;
 
+        // --- 核心組件：音效系統 (Chromebook 最佳化) ---
         function initAudioContext() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -215,20 +227,7 @@
             switchView('flashcards');
         };
 
-        function checkCompatibility() {
-            const isHttps = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
-            const isSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
-            const isLine = /Line/i.test(navigator.userAgent);
-            const isFB = /FBAN|FBAV/i.test(navigator.userAgent);
-
-            if (!isHttps || !isSupported || isLine || isFB) {
-                document.getElementById('compatibility-warning').classList.remove('hidden');
-                if (isLine || isFB) {
-                    showToast("請使用外部瀏覽器開啟，功能才會完整喔！");
-                }
-            }
-        }
-
+        // --- 語音辨識機制 (確保 Chromebook 正常使用) ---
         function initSpeech() {
             if (recognition) return;
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -236,12 +235,26 @@
                 recognition = new SpeechRecognition();
                 recognition.lang = 'en-US';
                 recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
                 recognition.onresult = (event) => {
                     const result = event.results[0][0].transcript.toLowerCase();
                     const filtered = getFilteredFlashcards();
                     processPronunciation(result, filtered[currentCardIndex].word.toLowerCase());
                 };
-                recognition.onerror = () => stopRecordingState();
+                recognition.onend = () => { if(isRecording) stopRecordingState(); };
+                recognition.onerror = (e) => { 
+                    stopRecordingState(); 
+                    console.error("Speech Recognition Error:", e.error);
+                    if (e.error === 'not-allowed') showToast("請允許麥克風權限");
+                };
+            }
+        }
+
+        function checkCompatibility() {
+            const isHttps = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
+            const isSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+            if (!isHttps || !isSupported) {
+                document.getElementById('compatibility-warning').classList.remove('hidden');
             }
         }
 
@@ -250,14 +263,12 @@
             document.querySelectorAll('.nav-item').forEach(v => v.classList.replace('text-pink-500', 'text-gray-400'));
             const target = document.getElementById(`view-${view}`);
             if (target) target.classList.remove('hidden');
-
             const navItems = document.querySelectorAll('.nav-item');
             if (view === 'flashcards') { navItems[0].classList.replace('text-gray-400', 'text-pink-500'); renderFlashcards(); }
             else if (view === 'challenges') { navItems[1].classList.replace('text-gray-400', 'text-pink-500'); renderChallenges(); }
             else if (view === 'logs') { navItems[2].classList.replace('text-gray-400', 'text-pink-500'); renderLogs(); }
         }
 
-        // --- 單字過濾邏輯 ---
         function getFilteredFlashcards() {
             return currentFlashcardStage === 1 ? vocabData.slice(0, 13) : vocabData.slice(13);
         }
@@ -279,57 +290,60 @@
             checkLearningStatus(word.id);
 
             container.innerHTML = `
-                <div class="flex flex-col items-center py-2">
+                <div class="flex flex-col items-center">
                     <!-- 階段切換選單 -->
-                    <div class="flex w-full bg-gray-100 rounded-2xl p-1 mb-6 border-2 border-gray-200 shadow-inner">
-                        <button onclick="setFlashcardStage(1)" class="flex-1 py-2 rounded-xl font-black text-xs transition-all ${currentFlashcardStage === 1 ? 'bg-white text-pink-500 shadow-sm' : 'text-gray-400'}">第一階段</button>
-                        <button onclick="setFlashcardStage(2)" class="flex-1 py-2 rounded-xl font-black text-xs transition-all ${currentFlashcardStage === 2 ? 'bg-white text-cyan-500 shadow-sm' : 'text-gray-400'}">第二階段</button>
+                    <div class="flex w-full max-w-md bg-gray-200 rounded-3xl p-1 mb-8 border-2 border-gray-100 shadow-inner">
+                        <button onclick="setFlashcardStage(1)" class="flex-1 py-3 rounded-2xl font-black text-sm transition-all ${currentFlashcardStage === 1 ? 'bg-white text-pink-500 shadow-md scale-[1.02]' : 'text-gray-500 hover:text-gray-700'}">第一階段</button>
+                        <button onclick="setFlashcardStage(2)" class="flex-1 py-3 rounded-2xl font-black text-sm transition-all ${currentFlashcardStage === 2 ? 'bg-white text-cyan-500 shadow-md scale-[1.02]' : 'text-gray-500 hover:text-gray-700'}">第二階段</button>
                     </div>
 
-                    <div class="w-full flex justify-between items-center mb-6 px-2">
-                        <span class="bg-yellow-300 text-pink-600 font-black px-4 py-1 rounded-full text-xs">進度 ${currentCardIndex + 1}/${filtered.length}</span>
-                        ${userStats.learned.includes(word.id) ? '<span class="text-green-500 font-bold text-sm">✨ 已學會</span>' : ''}
+                    <div class="w-full max-w-lg flex justify-between items-center mb-6 px-4">
+                        <span class="bg-yellow-300 text-pink-600 font-black px-4 py-1 rounded-full text-xs md:text-sm shadow-sm">單字進度 ${currentCardIndex + 1}/${filtered.length}</span>
+                        ${userStats.learned.includes(word.id) ? '<span class="text-green-500 font-black text-sm md:text-base animate-bounce">✨ 已學會</span>' : ''}
                     </div>
 
-                    <div id="flashcard" class="relative w-full aspect-[4/5] perspective-1000 cursor-pointer" onclick="flipCard()">
-                        <div class="card-inner w-full h-full relative duration-500 shadow-xl rounded-[3rem] border-8 border-white">
+                    <div id="flashcard" class="relative w-full aspect-[4/5] md:aspect-[5/4] perspective-1000 cursor-pointer" onclick="flipCard()">
+                        <div class="card-inner w-full h-full relative duration-500 shadow-2xl rounded-[3rem] border-8 border-white">
                             <div class="card-front absolute inset-0 dopamine-gradient rounded-[2.5rem] flex flex-col items-center justify-center p-8 text-center">
-                                <h2 class="text-4xl font-black text-gray-800 break-words w-full mb-4">${word.word}</h2>
-                                <p class="text-lg font-bold text-pink-500 italic uppercase tracking-widest">${word.pos}</p>
-                                <p class="mt-8 text-gray-400 text-xs font-bold tracking-widest uppercase italic">點擊翻面</p>
+                                <h2 class="text-5xl md:text-7xl font-black text-gray-800 break-words w-full mb-6">${word.word}</h2>
+                                <p class="text-xl md:text-2xl font-bold text-pink-500 italic uppercase tracking-widest">${word.pos}</p>
+                                <p class="mt-12 text-gray-400 text-xs md:text-sm font-bold tracking-widest uppercase italic animate-pulse">點擊翻面</p>
                             </div>
                             <div class="card-back absolute inset-0 bg-white rounded-[2.5rem] flex flex-col items-center justify-center p-8 text-center">
-                                <h2 class="text-3xl font-black text-pink-500">${word.ch}</h2>
+                                <h2 class="text-4xl md:text-6xl font-black text-pink-500">${word.ch}</h2>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-4 gap-3 w-full mt-8">
-                        <button onclick="prevCard(event)" class="bg-white border-4 border-gray-100 p-4 rounded-3xl flex items-center justify-center btn-bounce">
-                            <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path></svg>
+                    <div class="grid grid-cols-4 gap-4 w-full max-w-lg mt-10">
+                        <button onclick="prevCard(event)" class="bg-white border-4 border-gray-100 p-5 rounded-[2rem] flex items-center justify-center btn-bounce shadow-md">
+                            <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-                        <button onclick="playAudio(event)" title="音檔鍵" class="bg-yellow-400 border-4 border-yellow-200 p-4 rounded-3xl flex items-center justify-center btn-bounce shadow-lg shadow-yellow-100 text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                        
+                        <button onclick="playAudio(event)" title="播放發音" class="bg-yellow-400 border-4 border-yellow-200 p-5 rounded-[2rem] flex items-center justify-center btn-bounce shadow-lg shadow-yellow-100 text-white">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                         </button>
-                        <button id="mic-btn" onclick="toggleMic(event)" title="錄音鍵" class="bg-pink-500 shadow-lg shadow-pink-100 p-4 rounded-3xl flex items-center justify-center btn-bounce relative text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 10v1a7 7 0 01-14 0v-1m7 11v-4m-3 4h6"></path></svg>
-                            <div id="recording-pulse" class="absolute inset-0 rounded-3xl bg-pink-400 animate-ping hidden"></div>
+
+                        <button id="mic-btn" onclick="toggleMic(event)" title="錄音跟讀" class="bg-pink-500 shadow-lg shadow-pink-100 p-5 rounded-[2rem] flex items-center justify-center btn-bounce relative text-white">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 10v1a7 7 0 01-14 0v-1m7 11v-4m-3 4h6"></path></svg>
+                            <div id="recording-pulse" class="absolute inset-0 rounded-[2rem] bg-pink-400 animate-ping hidden"></div>
                         </button>
-                        <button onclick="nextCard(event)" class="bg-white border-4 border-cyan-300 p-4 rounded-3xl flex items-center justify-center btn-bounce">
-                            <svg class="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+
+                        <button onclick="nextCard(event)" class="bg-white border-4 border-cyan-300 p-5 rounded-[2rem] flex items-center justify-center btn-bounce shadow-md">
+                            <svg class="w-8 h-8 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     </div>
 
-                    <div id="pronounce-feedback" class="mt-6 w-full hidden">
-                        <div class="bg-white rounded-[2rem] p-5 border-4 border-dashed border-gray-100 flex flex-col items-center text-center">
-                            <p id="sim-score" class="text-xl font-black mb-4"></p>
-                            <button id="play-back-btn" class="bg-cyan-500 text-white shadow-lg shadow-cyan-100 px-8 py-3 rounded-2xl text-sm font-black btn-bounce uppercase tracking-tighter italic">
+                    <div id="pronounce-feedback" class="mt-8 w-full max-w-lg hidden">
+                        <div class="bg-white rounded-[2.5rem] p-6 border-4 border-dashed border-cyan-100 flex flex-col items-center text-center shadow-sm">
+                            <p id="sim-score" class="text-2xl font-black mb-4"></p>
+                            <button id="play-back-btn" class="bg-cyan-500 text-white shadow-lg shadow-cyan-100 px-10 py-4 rounded-3xl text-base font-black btn-bounce uppercase tracking-tighter italic">
                                 👂 播放我的錄音
                             </button>
                         </div>
                     </div>
 
-                    <p class="mt-8 text-[11px] text-gray-400 font-bold tracking-wide">💡 查看卡片 2 次並播放發音 1 次即可學會！</p>
+                    <p class="mt-10 text-sm text-gray-400 font-bold tracking-wide">💡 查看卡片 2 次並播放發音 1 次即可學會！</p>
                 </div>
             `;
         }
@@ -365,6 +379,7 @@
             isRecording = true;
             document.getElementById('recording-pulse').classList.remove('hidden');
             audioChunks = [];
+            
             navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                 mediaRecorder = new MediaRecorder(stream);
                 mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
@@ -373,7 +388,7 @@
                     document.getElementById('play-back-btn').onclick = () => new Audio(audioUrl).play();
                 };
                 mediaRecorder.start();
-                if (recognition) try { recognition.start(); } catch(err) {}
+                if (recognition) try { recognition.start(); } catch(err) { console.error(err); }
                 setTimeout(stopRecordingState, 3000);
             }).catch(() => { stopRecordingState(); showToast("麥克風存取失敗"); });
         }
@@ -397,11 +412,11 @@
                 playSuccessSound(); 
                 const isExcel = similarity >= 85;
                 scoreDisplay.innerText = isExcel ? "Excellent! ✨ 太準了！" : "Good! 👍 不錯喔！";
-                scoreDisplay.className = `text-xl font-black ${isExcel ? 'text-green-500' : 'text-yellow-500'}`;
+                scoreDisplay.className = `text-2xl font-black ${isExcel ? 'text-green-500' : 'text-yellow-500'}`;
                 if (!userStats.goodPronunciations.includes(wordId)) { userStats.goodPronunciations.push(wordId); saveStats(); }
             } else {
                 playErrorSound(); scoreDisplay.innerText = "Try again! 🎤 再大聲一點！";
-                scoreDisplay.className = "text-xl font-black text-red-400";
+                scoreDisplay.className = "text-2xl font-black text-red-400";
             }
         }
 
@@ -409,22 +424,33 @@
         function renderChallenges() {
             const container = document.getElementById('view-challenges');
             container.innerHTML = `
-                <div class="space-y-6 py-4">
-                    <div class="flex items-center justify-between mb-8">
-                        <h2 class="text-4xl font-black text-gray-800 italic uppercase tracking-tighter">單字競技場</h2>
-                        <span class="bg-pink-100 text-pink-500 px-3 py-1 rounded-full text-[10px] font-black uppercase">選擇挑戰</span>
+                <div class="space-y-8 py-4">
+                    <div class="flex items-center justify-between mb-8 px-2">
+                        <h2 class="text-4xl md:text-5xl font-black text-gray-800 italic uppercase tracking-tighter text-shadow">單字競技場</h2>
+                        <span class="bg-pink-100 text-pink-500 px-4 py-2 rounded-full text-xs md:text-sm font-black uppercase">Level Select</span>
                     </div>
-                    <div onclick="selectStageMenu(1)" class="bg-white border-b-8 border-pink-400 p-6 rounded-[2.5rem] flex items-center justify-between cursor-pointer btn-bounce shadow-sm text-shadow">
-                        <div><h3 class="text-xl font-black text-pink-500">眼明手快 (Reflex)</h3><p class="text-gray-400 text-xs font-bold">考驗單字直覺聯想力</p></div>
-                        <div class="text-right"><p class="text-[8px] text-gray-300 font-black uppercase">最高分</p><p class="text-lg font-black text-pink-400">${userStats.highScores.reflex}</p></div>
-                    </div>
-                    <div onclick="selectStageMenu(2)" class="bg-white border-b-8 border-cyan-400 p-6 rounded-[2.5rem] flex items-center justify-between cursor-pointer btn-bounce shadow-sm text-shadow">
-                        <div><h3 class="text-xl font-black text-cyan-500">記憶配對 (Memory)</h3><p class="text-gray-400 text-xs font-bold">4x4 終極記憶挑戰</p></div>
-                        <div class="text-right"><p class="text-[8px] text-gray-300 font-black uppercase">最短秒數</p><p class="text-lg font-black text-cyan-400">${userStats.highScores.memory === 999 ? '-' : userStats.highScores.memory + 's'}</p></div>
-                    </div>
-                    <div onclick="selectStageMenu(3)" class="bg-white border-b-8 border-yellow-400 p-6 rounded-[2.5rem] flex items-center justify-between cursor-pointer btn-bounce shadow-sm text-shadow">
-                        <div><h3 class="text-xl font-black text-yellow-600">拼字大師 (Spelling)</h3><p class="text-gray-400 text-xs font-bold">完美英文拼寫訓練</p></div>
-                        <div class="text-right"><p class="text-[8px] text-gray-300 font-black uppercase">最高分</p><p class="text-lg font-black text-yellow-500">${userStats.highScores.spelling}</p></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div onclick="selectStageMenu(1)" class="bg-white border-b-8 border-pink-400 p-8 rounded-[3rem] flex flex-col justify-between cursor-pointer btn-bounce shadow-md">
+                            <div><h3 class="text-2xl font-black text-pink-500">眼明手快</h3><p class="text-gray-400 text-xs font-bold mt-1 uppercase tracking-widest">Reflex</p></div>
+                            <div class="mt-6 pt-6 border-t-2 border-gray-50 flex justify-between items-end">
+                                <p class="text-[10px] text-gray-300 font-black uppercase">最高分</p>
+                                <p class="text-2xl font-black text-pink-400">${userStats.highScores.reflex}</p>
+                            </div>
+                        </div>
+                        <div onclick="selectStageMenu(2)" class="bg-white border-b-8 border-cyan-400 p-8 rounded-[3rem] flex flex-col justify-between cursor-pointer btn-bounce shadow-md">
+                            <div><h3 class="text-2xl font-black text-cyan-500">記憶配對</h3><p class="text-gray-400 text-xs font-bold mt-1 uppercase tracking-widest">Memory</p></div>
+                            <div class="mt-6 pt-6 border-t-2 border-gray-50 flex justify-between items-end">
+                                <p class="text-[10px] text-gray-300 font-black uppercase">最短秒數</p>
+                                <p class="text-2xl font-black text-cyan-400">${userStats.highScores.memory === 999 ? '-' : userStats.highScores.memory + 's'}</p>
+                            </div>
+                        </div>
+                        <div onclick="selectStageMenu(3)" class="bg-white border-b-8 border-yellow-400 p-8 rounded-[3rem] flex flex-col justify-between cursor-pointer btn-bounce shadow-md">
+                            <div><h3 class="text-2xl font-black text-yellow-600">拼字大師</h3><p class="text-gray-400 text-xs font-bold mt-1 uppercase tracking-widest">Spelling</p></div>
+                            <div class="mt-6 pt-6 border-t-2 border-gray-50 flex justify-between items-end">
+                                <p class="text-[10px] text-gray-300 font-black uppercase">最高分</p>
+                                <p class="text-2xl font-black text-yellow-500">${userStats.highScores.spelling}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -435,17 +461,17 @@
             const gameView = document.getElementById('view-game');
             gameView.classList.remove('hidden');
             gameView.innerHTML = `
-                <div class="py-8 text-center space-y-8">
-                    <button onclick="switchView('challenges')" class="text-gray-300 font-black text-[10px] uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 返回大廳</button>
-                    <h2 class="text-3xl font-black text-gray-800 italic uppercase">選擇挑戰範圍</h2>
-                    <div class="grid grid-cols-1 gap-4">
-                        <button onclick="startLevelWithStage(${lv}, 1)" class="p-8 bg-white border-b-8 border-pink-400 rounded-[2.5rem] btn-bounce">
-                            <p class="text-2xl font-black text-pink-500">第一階段</p>
-                            <p class="text-gray-400 text-xs font-bold mt-1">content 到 encounter</p>
+                <div class="py-12 text-center space-y-12">
+                    <button onclick="switchView('challenges')" class="text-gray-300 font-black text-xs md:text-sm uppercase flex items-center justify-center w-full"><svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 返回大廳</button>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-800 italic uppercase">選擇挑戰範圍</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                        <button onclick="startLevelWithStage(${lv}, 1)" class="p-12 bg-white border-b-8 border-pink-400 rounded-[4rem] btn-bounce shadow-xl">
+                            <p class="text-3xl font-black text-pink-500">第一階段</p>
+                            <p class="text-gray-400 text-sm font-bold mt-2">content 到 encounter</p>
                         </button>
-                        <button onclick="startLevelWithStage(${lv}, 2)" class="p-8 bg-white border-b-8 border-cyan-400 rounded-[2.5rem] btn-bounce">
-                            <p class="text-2xl font-black text-cyan-500">第二階段</p>
-                            <p class="text-gray-400 text-xs font-bold mt-1">frustration 到 do one's best</p>
+                        <button onclick="startLevelWithStage(${lv}, 2)" class="p-12 bg-white border-b-8 border-cyan-400 rounded-[4rem] btn-bounce shadow-xl">
+                            <p class="text-3xl font-black text-cyan-500">第二階段</p>
+                            <p class="text-gray-400 text-sm font-bold mt-2">frustration 到 do one's best</p>
                         </button>
                     </div>
                 </div>
@@ -468,10 +494,10 @@
                 const opts = [...data.filter(v => v.id !== target.id).sort(() => 0.5-Math.random()).slice(0,3), target].sort(() => 0.5-Math.random());
                 view.innerHTML = `
                     <div class="py-4">
-                        <button onclick="switchView('challenges')" class="mb-4 text-gray-300 font-black text-[10px] uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
-                        <div class="flex justify-between items-end mb-8"><span class="text-3xl font-black text-pink-500 italic">得分: ${score}</span><span class="text-gray-300 font-black text-xs uppercase">題次 ${q+1}/${quiz.length}</span></div>
-                        <div class="bg-white py-12 rounded-[3rem] border-8 border-pink-100 text-center mb-8 shadow-xl"><h2 class="text-4xl font-black text-gray-800">${target.word}</h2></div>
-                        <div class="grid grid-cols-1 gap-3">${opts.map(o => `<button onclick="this.disabled=true; checkR(this, ${o.id===target.id})" class="w-full bg-white p-5 rounded-2xl border-4 border-gray-100 font-bold text-lg btn-bounce">${o.ch}</button>`).join('')}</div>
+                        <button onclick="switchView('challenges')" class="mb-6 text-gray-300 font-black text-xs uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
+                        <div class="flex justify-between items-end mb-8"><span class="text-4xl font-black text-pink-500 italic">SCORE: ${score}</span><span class="text-gray-400 font-black text-sm uppercase tracking-widest">Q ${q+1}/${quiz.length}</span></div>
+                        <div class="bg-white py-20 rounded-[4rem] border-8 border-pink-100 text-center mb-10 shadow-xl"><h2 class="text-6xl md:text-8xl font-black text-gray-800">${target.word}</h2></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">${opts.map(o => `<button onclick="this.disabled=true; checkR(this, ${o.id===target.id})" class="w-full bg-white p-6 rounded-3xl border-4 border-gray-100 font-bold text-xl md:text-2xl btn-bounce hover:border-pink-300">${o.ch}</button>`).join('')}</div>
                     </div>
                 `;
             };
@@ -492,10 +518,10 @@
             const render = () => {
                 view.innerHTML = `
                     <div class="py-4">
-                        <button onclick="clearInterval(${timer}); switchView('challenges')" class="mb-4 text-gray-300 font-black text-[10px] uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
-                        <div class="flex justify-between items-center mb-6"><h3 class="text-2xl font-black text-cyan-500 italic">計時: ${time}s</h3></div>
-                        <div class="grid grid-cols-4 gap-2">
-                            ${cards.map((c, i) => `<div onclick="selM(${i})" id="mc-${i}" class="h-20 bg-white rounded-xl border-2 ${c.matched ? 'border-green-200 opacity-20 shadow-none' : 'border-gray-100 shadow-sm'} flex items-center justify-center p-1 text-center text-[10px] font-black transition-all active:scale-95 cursor-pointer overflow-hidden leading-tight"><span class="${c.matched ? 'text-green-500' : 'text-gray-700'}">${c.t}</span></div>`).join('')}
+                        <button onclick="clearInterval(${timer}); switchView('challenges')" class="mb-6 text-gray-300 font-black text-xs uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
+                        <div class="flex justify-between items-center mb-8"><h3 class="text-3xl font-black text-cyan-500 italic">TIME: ${time}s</h3></div>
+                        <div class="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
+                            ${cards.map((c, i) => `<div onclick="selM(${i})" id="mc-${i}" class="h-28 md:h-36 bg-white rounded-[2rem] border-4 ${c.matched ? 'border-green-200 opacity-20 shadow-none' : 'border-gray-100 shadow-md'} flex items-center justify-center p-2 text-center text-xs md:text-sm font-black transition-all active:scale-95 cursor-pointer overflow-hidden leading-tight"><span class="${c.matched ? 'text-green-500' : 'text-gray-700'}">${c.t}</span></div>`).join('')}
                         </div>
                     </div>
                 `;
@@ -527,11 +553,11 @@
                 const target = quiz[q];
                 view.innerHTML = `
                     <div class="py-4">
-                        <button onclick="switchView('challenges')" class="mb-4 text-gray-300 font-black text-[10px] uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
-                        <div class="flex justify-between mb-8"><span class="text-3xl font-black text-yellow-500 italic text-shadow">得分: ${score}</span><span class="text-gray-300 font-black text-xs uppercase">題次 ${q+1}/${quiz.length}</span></div>
-                        <div id="spelling-card" class="bg-white w-full py-10 rounded-[3rem] border-8 border-yellow-100 text-center mb-8 shadow-xl"><p class="text-pink-400 font-black text-[10px] mb-1 uppercase tracking-widest">${target.pos}</p><h2 class="text-2xl font-black text-gray-800">${target.ch}</h2></div>
-                        <input type="text" id="spell-in" autocomplete="off" autofocus class="w-full bg-white border-4 border-yellow-300 p-5 rounded-3xl text-center text-2xl font-black outline-none mb-6 shadow-inner transition-all" placeholder="在此輸入英文單字">
-                        <button id="spell-btn" onclick="checkS()" class="w-full bg-yellow-400 py-5 rounded-3xl font-black text-2xl text-white shadow-lg btn-bounce">提交答案</button>
+                        <button onclick="switchView('challenges')" class="mb-6 text-gray-300 font-black text-xs uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> 離開關卡</button>
+                        <div class="flex justify-between mb-8"><span class="text-4xl font-black text-yellow-500 italic text-shadow">SCORE: ${score}</span><span class="text-gray-400 font-black text-sm uppercase">Q ${q+1}/${quiz.length}</span></div>
+                        <div id="spelling-card" class="bg-white w-full py-20 rounded-[4rem] border-8 border-yellow-100 text-center mb-10 shadow-xl"><p class="text-pink-400 font-black text-lg mb-2 uppercase tracking-widest">${target.pos}</p><h2 class="text-4xl md:text-6xl font-black text-gray-800">${target.ch}</h2></div>
+                        <input type="text" id="spell-in" autocomplete="off" autofocus class="w-full max-w-xl mx-auto block bg-white border-4 border-yellow-300 p-8 rounded-[2.5rem] text-center text-3xl md:text-4xl font-black outline-none mb-10 shadow-inner transition-all" placeholder="TYPE HERE">
+                        <button id="spell-btn" onclick="checkS()" class="w-full max-w-xl mx-auto block bg-yellow-400 py-6 rounded-[2.5rem] font-black text-2xl text-white shadow-lg btn-bounce">提交答案</button>
                     </div>
                 `;
                 setTimeout(() => { const input = document.getElementById('spell-in'); if(input) input.focus(); }, 100);
@@ -556,36 +582,45 @@
             const percent = Math.round((userStats.learned.length / vocabData.length) * 100);
             const learnedWordList = userStats.learned.map(id => vocabData.find(v => v.id === id)?.word).filter(Boolean);
             container.innerHTML = `
-                <div class="py-4 space-y-8">
-                    <div class="flex items-center justify-between"><h2 class="text-4xl font-black text-gray-800 italic uppercase tracking-tighter text-shadow">學習日誌</h2><button onclick="resetStats()" class="bg-red-50 text-red-400 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-tighter">清除進度</button></div>
-                    <div class="bg-white rounded-[2.5rem] p-8 border-b-8 border-pink-300 shadow-sm relative overflow-hidden">
+                <div class="py-4 space-y-12">
+                    <div class="flex items-center justify-between"><h2 class="text-4xl md:text-5xl font-black text-gray-800 italic uppercase tracking-tighter text-shadow">學習日誌</h2><button onclick="resetStats()" class="bg-red-50 text-red-400 px-4 py-2 rounded-full text-[10px] font-black uppercase hover:bg-red-100 transition-colors">清除紀錄</button></div>
+                    
+                    <div class="bg-white rounded-[3rem] p-12 border-b-8 border-pink-300 shadow-sm relative overflow-hidden">
                         <div class="relative z-10 flex items-center justify-between">
-                            <div class="text-left text-shadow">
-                                <h3 class="text-gray-400 font-black text-[10px] uppercase tracking-widest mb-1">掌握程度</h3>
-                                <div class="text-5xl font-black text-pink-500">${percent}%</div>
+                            <div class="text-left">
+                                <h3 class="text-gray-400 font-black text-sm uppercase tracking-widest mb-2">掌握程度</h3>
+                                <div class="text-6xl md:text-7xl font-black text-pink-500">${percent}%</div>
                             </div>
-                            <div class="w-16 h-16 border-4 border-pink-50 rounded-full flex items-center justify-center shadow-inner"><span class="text-pink-500 font-black text-lg">${userStats.learned.length}</span></div>
+                            <div class="w-24 h-24 border-8 border-pink-50 rounded-full flex items-center justify-center shadow-inner bg-pink-50/30">
+                                <span class="text-pink-500 font-black text-3xl">${userStats.learned.length}</span>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-50 h-3 rounded-full mt-6 overflow-hidden"><div class="bg-pink-400 h-full transition-all duration-1000" style="width: ${percent}%"></div></div>
-                        <div class="mt-8">
-                            <h4 class="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-3 italic">我學會的單字清單</h4>
-                            <div class="flex flex-wrap gap-2 text-shadow-none">
-                                ${learnedWordList.length === 0 ? '<p class="text-gray-300 text-[10px] italic">尚未有已掌握的單字...</p>' : learnedWordList.map(w => `<span class="bg-pink-50 text-pink-500 px-3 py-1 rounded-lg text-[10px] font-black border border-pink-100 uppercase tracking-tighter">${w}</span>`).join('')}
+                        <div class="w-full bg-gray-50 h-5 rounded-full mt-10 overflow-hidden shadow-inner">
+                            <div class="bg-pink-400 h-full transition-all duration-1000 shadow-[0_0_10px_rgba(236,72,153,0.3)]" style="width: ${percent}%"></div>
+                        </div>
+                        <div class="mt-12">
+                            <h4 class="text-xs text-gray-400 font-black uppercase tracking-widest mb-4 italic">已學會的單字清單</h4>
+                            <div class="flex flex-wrap gap-3">
+                                ${learnedWordList.length === 0 ? '<p class="text-gray-300 text-sm italic">快去挑戰單字卡吧！</p>' : learnedWordList.map(w => `<span class="bg-pink-50 text-pink-500 px-4 py-2 rounded-2xl text-xs md:text-sm font-black border-2 border-pink-100 uppercase tracking-tighter shadow-sm hover:scale-110 transition-transform cursor-default">${w}</span>`).join('')}
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border-b-8 border-cyan-300">
-                        <h4 class="font-black text-gray-700 text-xs mb-4 uppercase tracking-tighter flex items-center"><span class="mr-2">🏆</span> 發音成就館</h4>
-                        <div class="flex flex-wrap gap-2">
-                            ${userStats.goodPronunciations.length === 0 ? '<p class="text-gray-300 text-[10px] italic py-2">快去練習發音吧！</p>' : userStats.goodPronunciations.map(id => { const w = vocabData.find(v => v.id === id); return `<span class="bg-cyan-50 text-cyan-600 px-3 py-1 rounded-xl text-[10px] font-black border border-cyan-100 uppercase">${w.word}</span>`; }).join('')}
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-[3rem] p-8 shadow-sm border-b-8 border-cyan-300 h-full">
+                            <h4 class="font-black text-gray-700 text-sm mb-6 uppercase tracking-tighter flex items-center"><span class="mr-2 text-xl">🏆</span> 發音成就館</h4>
+                            <div class="flex flex-wrap gap-2">
+                                ${userStats.goodPronunciations.length === 0 ? '<p class="text-gray-300 text-xs italic py-2">快去練習發音吧！</p>' : userStats.goodPronunciations.map(id => { const w = vocabData.find(v => v.id === id); return `<span class="bg-cyan-50 text-cyan-600 px-3 py-1 rounded-xl text-[10px] md:text-xs font-black border border-cyan-100 uppercase">${w.word}</span>`; }).join('')}
+                            </div>
                         </div>
-                    </div>
-                    <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border-b-8 border-yellow-300">
-                        <h4 class="font-black text-gray-700 text-xs mb-4 uppercase tracking-tighter flex items-center"><span class="mr-2">🎮</span> 闖關名人堂</h4>
-                        <div class="space-y-2 text-center text-shadow-none">
-                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-2xl"><span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">眼明手快 (Reflex)</span><span class="text-sm font-black text-pink-500">${userStats.highScores.reflex} 分</span></div>
-                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-2xl"><span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">記憶配對 (Memory)</span><span class="text-sm font-black text-cyan-500">${userStats.highScores.memory === 999 ? '-' : userStats.highScores.memory + ' 秒'}</span></div>
-                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-2xl"><span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">拼字大師 (Spelling)</span><span class="text-sm font-black text-yellow-600">${userStats.highScores.spelling} 分</span></div>
+
+                        <div class="bg-white rounded-[3rem] p-8 shadow-sm border-b-8 border-yellow-300 h-full">
+                            <h4 class="font-black text-gray-700 text-sm mb-6 uppercase tracking-tighter flex items-center"><span class="mr-2 text-xl">🎮</span> 闖關名人堂</h4>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl shadow-inner"><span class="text-xs font-black text-gray-400 uppercase">眼明手快</span><span class="text-lg font-black text-pink-500">${userStats.highScores.reflex} 分</span></div>
+                                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl shadow-inner"><span class="text-xs font-black text-gray-400 uppercase">記憶配對</span><span class="text-lg font-black text-cyan-500">${userStats.highScores.memory === 999 ? '-' : userStats.highScores.memory + ' 秒'}</span></div>
+                                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl shadow-inner"><span class="text-xs font-black text-gray-400 uppercase">拼字大師</span><span class="text-lg font-black text-yellow-600">${userStats.highScores.spelling} 分</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -596,7 +631,7 @@
         function calculateSimilarity(s1, s2) { let m = 0; s1 = s1.trim().toLowerCase(); s2 = s2.trim().toLowerCase(); for(let i=0; i<Math.min(s1.length, s2.length); i++) if(s1[i]===s2[i]) m++; return (m/s2.length)*100; }
         function speak(text) { const utter = new SpeechSynthesisUtterance(text); utter.lang = 'en-US'; utter.rate = 0.9; window.speechSynthesis.speak(utter); }
         function showToast(msg) { const toast = document.getElementById('toast'); document.getElementById('toast-msg').innerText = msg; toast.classList.remove('hidden'); setTimeout(() => toast.classList.add('hidden'), 2500); }
-        function endGame(level, score, comment) { const modal = document.getElementById('game-modal'); const resDiv = document.getElementById('game-results'); if (level === 'Reflex' && score > userStats.highScores.reflex) userStats.highScores.reflex = score; if (level === 'Memory' && score < userStats.highScores.memory) userStats.highScores.memory = score; if (level === 'Spelling' && score > userStats.highScores.spelling) userStats.highScores.spelling = score; saveStats(); resDiv.innerHTML = `<div class="text-gray-300 font-black uppercase text-[10px] mb-1 tracking-widest">本次成績</div><div class="text-5xl font-black text-gray-800">${level === 'Memory' ? score + 's' : score}</div>`; document.getElementById('teacher-comment').innerText = comment; modal.classList.remove('hidden'); }
+        function endGame(level, score, comment) { const modal = document.getElementById('game-modal'); const resDiv = document.getElementById('game-results'); if (level === 'Reflex' && score > userStats.highScores.reflex) userStats.highScores.reflex = score; if (level === 'Memory' && score < userStats.highScores.memory) userStats.highScores.memory = score; if (level === 'Spelling' && score > userStats.highScores.spelling) userStats.highScores.spelling = score; saveStats(); resDiv.innerHTML = `<div class="text-gray-300 font-black uppercase text-xs mb-2 tracking-widest">本次成績</div><div class="text-6xl font-black text-gray-800">${level === 'Memory' ? score + 's' : score}</div>`; document.getElementById('teacher-comment').innerText = comment; modal.classList.remove('hidden'); }
         function closeModal() { document.getElementById('game-modal').classList.add('hidden'); switchView('challenges'); }
         function resetStats() { if (confirm("確定要刪除所有紀錄嗎？這會清除你的所有進度喔！")) { localStorage.removeItem('dopamine_stats'); location.reload(); } }
     </script>
